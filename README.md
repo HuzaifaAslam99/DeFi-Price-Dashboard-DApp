@@ -4,7 +4,7 @@ A real-time decentralized price feed dashboard that reads live ETH, BTC, and LIN
 
 ## Live Demo
 
-> Deploy your own using the setup instructions below.
+https://defi-price-dashboard-dapp.vercel.app/
 
 ---
 
