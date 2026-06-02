@@ -68,7 +68,7 @@ This means the frontend never hammers RPC nodes for historical data — only the
 ## Smart Contract
 
 **Network:** Base Sepolia  
-**Contract:** `PriceTracker.sol`
+**Contract:** 0xf08E74e71680d74f134a7306Beb5cB916AA940F6
 
 The contract integrates three Chainlink price feed aggregators:
 
