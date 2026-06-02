@@ -46,7 +46,7 @@ This means the frontend never hammers RPC nodes for historical data — only the
 
 | Technology | Purpose |
 |---|---|
-| React + Vite | Fast SPA with HMR |
+| React + Vite | Lightning-fast single-page UI |
 | Tailwind CSS | Utility-first styling |
 | Wagmi v2 | Ethereum hooks (read/write contracts) |
 | RainbowKit v2 | Wallet connection modal |
