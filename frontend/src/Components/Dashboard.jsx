@@ -49,8 +49,6 @@ export default function Dashboard() {
 
   useEffect(() => {
     fetchLogs();
-    // 15 seconds is fine, but if indexing is very slow, 
-    // you could reduce this to 8000 (8 seconds)
     const interval = setInterval(fetchLogs, 8000); 
     return () => clearInterval(interval);
   }, []);
