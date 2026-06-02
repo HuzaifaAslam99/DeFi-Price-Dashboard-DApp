@@ -9,4 +9,5 @@ export const config = getDefaultConfig({
   transports: {
     [baseSepolia.id]: http('https://sepolia.base.org'),
   },
+  syncConnectedChain: true,
 });

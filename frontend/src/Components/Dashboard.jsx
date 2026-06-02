@@ -10,9 +10,8 @@ export default function Dashboard() {
   const { writeContract, isPending } = useWriteContract();
   const [logs, setLogs] = useState([]);
   
-  // Use a direct deployment URL to avoid caching issues with '/version/latest'
   // const SUBGRAPH_URL = 'https://api.studio.thegraph.com/query/1754430/defi-price-tracker/version/latest';
-  // In your Dashboard.jsx or API file:
+ 
   const SUBGRAPH_URL = 'https://api.studio.thegraph.com/query/1754430/defi-price-tracker/v0.0.15';
 
   const fetchLogs = async () => {
@@ -80,7 +79,7 @@ export default function Dashboard() {
            <button
              onClick={handleLogPrice}
              disabled={isPending}
-             className={`px-5 py-2.5 rounded-xl font-semibold text-sm shadow-sm transition-all ${
+             className={`px-5 py-2.5 rounded-xl font-semibold text-sm shadow-sm transition-all cursor-pointer ${
                isPending ? 'bg-slate-100 text-slate-400 cursor-not-allowed' : 'bg-blue-600 text-white hover:bg-blue-700'
              }`}
            >
