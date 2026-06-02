@@ -32,9 +32,10 @@ export default function PriceChart({ logs }) {
       .filter(r => r.token.toUpperCase() === selected)
       .sort((a, b) => a.timestamp - b.timestamp)
       .slice(-20) // ← limit to last 20 data points
-      .map(r => {
+       .map(r => {
         const date = new Date(r.timestamp * 1000);
-        return {
+          return {
+          timestamp: r.timestamp, // ← unique key for each point
           label: date.toLocaleDateString(undefined, { month: 'short', day: 'numeric' }),
           fullDate: date.toLocaleDateString(undefined, {
             month: 'short', day: 'numeric', year: 'numeric',
@@ -42,7 +43,7 @@ export default function PriceChart({ logs }) {
           price: r.price,
         };
       });
-  }, [logs, selected]);
+    }, [logs, selected]);
 
   const activeColor = TOKENS.find(t => t.key === selected)?.color;
 
@@ -69,13 +70,16 @@ export default function PriceChart({ logs }) {
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={chartData}>
             <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f3f4f6" />
-            <XAxis
-              dataKey="label"
+             <XAxis
+              dataKey="timestamp"
               fontSize={11}
               axisLine={false}
               tickLine={false}
               interval="preserveStartEnd"
-              tickCount={5}
+              tickFormatter={(val) => {
+                const d = new Date(val * 1000);
+                return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+              }}
             />
             <YAxis
               domain={['auto', 'auto']}
@@ -85,13 +89,16 @@ export default function PriceChart({ logs }) {
               tickFormatter={v => `$${v.toLocaleString()}`}
               width={40}
             />
-            <Tooltip content={<CustomTooltip />} />
+            <Tooltip content={<CustomTooltip />}/>
             <Line
               type="monotone"
               dataKey="price"
+              key={selected}
               stroke={activeColor}
               strokeWidth={2}
               dot={false}
+              // dot={{ r: 4 }}
+              activeDot={{ r: 5 }}
               connectNulls
             />
           </LineChart>
