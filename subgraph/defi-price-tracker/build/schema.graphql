@@ -1,0 +1,9 @@
+type PriceRecord @entity(immutable: true) {
+  id: String!
+  token: String!     
+  price: BigInt!
+  timestamp: BigInt!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}

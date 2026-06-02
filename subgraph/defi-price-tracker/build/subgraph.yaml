@@ -1,0 +1,24 @@
+specVersion: 1.0.0
+schema:
+  file: schema.graphql
+dataSources:
+  - kind: ethereum
+    name: PriceTracker
+    network: base-sepolia
+    source:
+      address: "0xf08E74e71680d74f134a7306Beb5cB916AA940F6"
+      abi: PriceTracker
+      startBlock: 42311285
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - PriceRecord
+      abis:
+        - name: PriceTracker
+          file: PriceTracker\PriceTracker.json
+      eventHandlers:
+        - event: PriceLogged(string,uint256,uint256)
+          handler: handlePriceLogged
+      file: PriceTracker\PriceTracker.wasm
