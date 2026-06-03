@@ -5,9 +5,13 @@ import PriceCard from './PriceCard';
 import PriceChart from './PriceChart';
 import TransactionLogs from './TransactionLogs';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { useAccount } from 'wagmi';
+
+// inside Dashboard component
 
 export default function Dashboard() {
   const { writeContract, isPending } = useWriteContract();
+  const { isConnected } = useAccount();
   const [logs, setLogs] = useState([]);
   
   // const SUBGRAPH_URL = 'https://api.studio.thegraph.com/query/1754430/defi-price-tracker/version/latest';
@@ -75,14 +79,18 @@ export default function Dashboard() {
              <p className="text-sm text-slate-500 mt-1">Real-time assets tracking on Base Sepolia Network.</p>
            </div>
            <button
-             onClick={handleLogPrice}
-             disabled={isPending}
-             className={`px-5 py-2.5 rounded-xl font-semibold text-sm shadow-sm transition-all cursor-pointer ${
-               isPending ? 'bg-slate-100 text-slate-400 cursor-not-allowed' : 'bg-blue-600 text-white hover:bg-blue-700'
-             }`}
-           >
-             {isPending ? 'Confirming...' : 'Log Latest Price'}
-           </button>
+              onClick={handleLogPrice}
+              disabled={isPending || !isConnected}
+              className={`px-5 py-2.5 rounded-xl font-semibold text-sm shadow-sm transition-all cursor-pointer ${
+                !isConnected
+                  ? 'bg-slate-100 text-slate-400 cursor-not-allowed'
+                  : isPending
+                  ? 'bg-slate-100 text-slate-400 cursor-not-allowed'
+                  : 'bg-blue-600 text-white hover:bg-blue-700'
+              }`}
+            >
+              {!isConnected ? 'Wallet Not Connected' : isPending ? 'Confirming...' : 'Log Latest Price'}
+            </button>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

@@ -59,7 +59,7 @@ export default function PriceChart({ logs }) {
               backgroundColor: selected === key ? color : 'transparent',
               color: selected === key ? 'white' : color,
             }}
-            className="px-4 py-1.5 rounded-lg text-sm font-semibold border-2 transition-all"
+            className="px-4 py-1.5 rounded-lg text-sm font-semibold border-2 transition-all cursor-pointer"
           >
             {key}
           </button>
